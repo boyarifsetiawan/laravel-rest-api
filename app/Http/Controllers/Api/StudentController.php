@@ -93,7 +93,7 @@ class StudentController extends Controller
         } else {
             return response()->json([
                 'status' => 404,
-                'Message' => 'Something went wrong.'
+                'Message' => 'No such student found.'
             ]);
         }
     }
@@ -103,7 +103,19 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $student = Student::find($id);
+        if ($student) {
+            return response()->json([
+                'status' => 200,
+                'Message' => 'Success',
+                'data' => $student
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'Message' => 'No such student found.'
+            ]);
+        }
     }
 
     /**
@@ -111,7 +123,40 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $student = Student::find($id);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:191',
+            'course' => 'required|string|max:191',
+            'email' => 'required|email|max:191',
+            'phone' => 'required|digits:10',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 422,
+                'erorrs' => $validator->messages()
+            ], 422);
+        } else {
+            $student = Student::find($id);
+
+            if ($student) {
+                $student->update([
+                    'name' => $request->name,
+                    'course' => $request->course,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                ]);
+                return response()->json([
+                    'status' => 200,
+                    'Message' => 'Student updated succsessfully.'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'Message' => 'No such student found!'
+                ]);
+            }
+        }
     }
 
     /**
@@ -119,6 +164,19 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $student = Student::find($id);
+
+        if ($student) {
+            $student->delete();
+            return response()->json([
+                'status' => 200,
+                'Message' => 'Student deleted succsessfully.'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'Message' => 'No such student found!'
+            ]);
+        }
     }
 }

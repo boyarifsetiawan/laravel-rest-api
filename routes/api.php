@@ -22,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/students', [StudentController::class, 'index'])->name('student.index');
 Route::post('/students', [StudentController::class, 'store'])->name('student.store');
 Route::get('/students/{id}', [StudentController::class, 'show'])->name('student.show');
+Route::put('/students/{id}/edit', [StudentController::class, 'update'])->name('student.update');
+Route::delete('/students/{id}/delete', [StudentController::class, 'destroy'])->name('student.destroy');
