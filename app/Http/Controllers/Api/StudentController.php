@@ -26,7 +26,7 @@ class StudentController extends Controller
             return response()->json([
                 'status' => 404,
                 'message' => 'Student not found.',
-                'students' => $students
+                'data' => $students
             ]);
         }
     }
