@@ -54,7 +54,7 @@ class StudentController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'status' => 422,
-                'erorrs' => $validator->messages()
+                'errors' => $validator->messages()
             ], 422);
         } else {
             $student = Student::create([
