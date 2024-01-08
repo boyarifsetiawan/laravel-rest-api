@@ -1,8 +1,13 @@
 <?php
 
-use App\Http\Controllers\Api\StudentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\UsersController;
+use App\Http\Controllers\Api\AnggotaController;
+use App\Http\Controllers\Api\StudentController;
+use App\Http\Controllers\Api\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +30,8 @@ Route::get('/students/{id}', [StudentController::class, 'show']);
 Route::get('/students/{id}/edit', [StudentController::class, 'edit']);
 Route::put('/students/{id}/edit', [StudentController::class, 'update']);
 Route::delete('/students/{id}/delete', [StudentController::class, 'destroy']);
+
+Route::apiResource('/users', UserController::class);
+Route::apiResource('/books', BookController::class);
+Route::apiResource('/anggota', AnggotaController::class);
+Route::apiResource('/transaksi', TransaksiController::class);
