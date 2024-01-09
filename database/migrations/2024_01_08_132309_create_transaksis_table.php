@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
             $table->string('id_transaksi');
-            $table->unsignedBigInteger('anggota_id');
-            $table->unsignedBigInteger('buku_id');
-            $table->dateTime('tgl_peminjaman');
-            $table->dateTime('tgl_pengambalian');
+            $table->string('anggota_id');
+            $table->string('buku_id');
+            $table->string('tgl_peminjaman');
+            $table->string('tgl_pengambalian');
             $table->timestamps();
         });
     }

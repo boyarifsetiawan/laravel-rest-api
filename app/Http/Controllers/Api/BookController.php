@@ -42,9 +42,13 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        $validated = $request()->validated();
-
-        $book = Book::create($validated);
+        $book = Book::create([
+            'id_buku' => $request->id_buku,
+            'judul_buku' => $request->judul_buku,
+            'kategori' => $request->kategori,
+            'pengarang' => $request->pengarang,
+            'penerbit' => $request->penerbit
+        ]);
         if ($book) {
             return response()->json([
                 'status' => 200,
@@ -104,11 +108,16 @@ class BookController extends Controller
      */
     public function update(StoreBookRequest $request, string $id)
     {
-        $validated = $request()->validated();
         $book = Book::find($request->id);
 
         if ($book) {
-            $book->update($validated);
+            $book->update([
+                'id_buku' => $request->id_buku,
+                'judul_buku' => $request->judul_buku,
+                'kategori' => $request->kategori,
+                'pengarang' => $request->pengarang,
+                'penerbit' => $request->penerbit
+            ]);
             return response()->json([
                 'status' => 200,
                 'message' => 'Book updated succsessfuly.'
