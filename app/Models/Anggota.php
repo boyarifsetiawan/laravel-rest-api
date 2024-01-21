@@ -10,4 +10,9 @@ class Anggota extends Model
     use HasFactory;
 
     protected $fillable = ['id_anggota', 'nama', 'jenis_kelamin', 'alamat', 'status'];
+
+    public function peminjamans()
+    {
+        return $this->hasMany(Transaksi::class);
+    }
 }

@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->string('id_transaksi');
-            $table->string('anggota_id');
-            $table->string('buku_id');
-            $table->string('tgl_peminjaman');
-            $table->string('tgl_pengambalian');
+            $table->unsignedBigInteger('id_transaksi');
+            $table->unsignedBigInteger('anggota_id');
+            $table->unsignedBigInteger('buku_id');
+            $table->date('tgl_peminjaman');
+            $table->date('tgl_pengambalian');
             $table->timestamps();
         });
     }
