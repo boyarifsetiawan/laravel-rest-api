@@ -11,7 +11,7 @@ class Anggota extends Model
 
     protected $fillable = ['id_anggota', 'nama', 'jenis_kelamin', 'alamat', 'status'];
 
-    public function peminjamans()
+    public function transaksis()
     {
         return $this->hasMany(Transaksi::class);
     }

@@ -23,8 +23,8 @@ class StoreTransaksiRequest extends FormRequest
     {
         return [
             'id_transaksi' => 'required',
-            'id_anggota' => 'required',
-            'id_buku' => 'required',
+            'anggota_id' => 'required',
+            'buku_id' => 'required',
             'tgl_peminjaman' => 'required',
             'tgl_pengembalian' => 'required',
         ];

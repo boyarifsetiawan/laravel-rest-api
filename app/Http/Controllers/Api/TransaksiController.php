@@ -6,6 +6,9 @@ use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTransaksiRequest;
+use App\Models\Anggota;
+use App\Models\Book;
+
 
 class TransaksiController extends Controller
 {
@@ -14,7 +17,7 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        $transaksi = Transaksi::all();
+        $transaksi = Transaksi::with('book', 'anggota')->get();
         if ($transaksi->count() > 0) {
             return response()->json([
                 'status' => 200,
@@ -34,7 +37,21 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        //
+        $books = Book::all();
+        $anggotas = Anggota::all();
+        if ($books->count() > 0 && $anggotas->count() > 0) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Success',
+                'books' => $books,
+                'anggotas' => $anggotas
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Books or Anggota not found!'
+            ], 404);
+        }
     }
 
     /**
@@ -44,8 +61,8 @@ class TransaksiController extends Controller
     {
         $transaksi = Transaksi::create([
             'id_transaksi' => $request->id_transaksi,
-            'id_anggota' => $request->id_anggota,
-            'id_buku' => $request->id_buku,
+            'anggota_id' => $request->anggota_id,
+            'buku_id' => $request->buku_id,
             'tgl_peminjaman' => $request->tgl_peminjaman,
             'tgl_pengembalian' => $request->tgl_pengembalian
         ]);
@@ -113,8 +130,8 @@ class TransaksiController extends Controller
         if ($transaksi) {
             $transaksi->update([
                 'id_transaksi' => $request->id_transaksi,
-                'id_anggota' => $request->id_anggota,
-                'id_buku' => $request->id_buku,
+                'anggota_id' => $request->anggota_id,
+                'buku_id' => $request->buku_id,
                 'tgl_peminjaman' => $request->tgl_peminjaman,
                 'tgl_pengembalian' => $request->tgl_pengembalian
             ]);

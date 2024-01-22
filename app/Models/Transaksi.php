@@ -9,20 +9,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Transaksi extends Model
 {
     use HasFactory;
-    protected $fillable = ['id_transaksi', 'id_anggota', 'id_buku', 'tgl_peminjaman', 'tgl_pengembalian'];
-
-    protected $casts = [
-        'tgl_peminjaman' => 'datetime',
-        'tgl_pengembalian' => 'datetime'
-    ];
+    protected $fillable = ['id_transaksi', 'anggota_id', 'buku_id', 'tgl_peminjaman', 'tgl_pengembalian'];
 
     public function anggota()
     {
-        return $this->belongsTo(Anggota::class);
+        return $this->belongsTo(Anggota::class, 'anggota_id');
     }
 
     public function book()
     {
-        return $this->belongsTo(Book::class);
+        return $this->belongsTo(Book::class, 'buku_id');
     }
 }
