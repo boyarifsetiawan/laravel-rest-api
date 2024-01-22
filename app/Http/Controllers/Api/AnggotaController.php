@@ -18,7 +18,7 @@ class AnggotaController extends Controller
         if ($anggotas->count() > 0) {
             return response()->json([
                 'status' => 200,
-                'message' => 'Success',
+                'message' => 'Success!',
                 'data' => $anggotas
             ], 200);
         } else {
