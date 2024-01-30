@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_transaksi');
-            $table->unsignedBigInteger('anggota_id');
-            $table->unsignedBigInteger('buku_id');
+            $table->integer('id_transaksi');
+            $table->foreignId('anggota_id')->references('id')->on('anggotas')->cascadeOnDelete();
+            $table->foreignId('buku_id')->references('id')->on('books')->cascadeOnDelete();
             $table->date('tgl_peminjaman');
             $table->date('tgl_pengembalian');
             $table->timestamps();

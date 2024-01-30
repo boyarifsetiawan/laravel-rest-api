@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ItemController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\AnggotaController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TransaksiController;
 use App\Models\Transaksi;
 
@@ -32,3 +33,6 @@ Route::apiResource('/anggota', AnggotaController::class);
 Route::apiResource('/transaksi', TransaksiController::class);
 
 Route::get('/bookandanggota', [TransaksiController::class, 'create']);
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
